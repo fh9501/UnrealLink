@@ -11,5 +11,7 @@ object RdRiderModel: Ext(SolutionModel.Solution){
         property("test_connection", int.nullable)
         signal("unreal_log", string)
         property("play", bool)
+
+        sink("pluginIsNotInstalled", bool)
     }
 }

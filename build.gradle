@@ -119,8 +119,7 @@ task patchPropsFile {
     def version = versionGroup[0][1]
     pluginPropsFile.text = """<Project>
   <PropertyGroup>
-    <SdkVersion>${version}</SdkVersion>
-    
+    <SdkVersion>${version}</SdkVersion>    
     <Title>resharper_unreal</Title>
   </PropertyGroup>
 </Project>"""
