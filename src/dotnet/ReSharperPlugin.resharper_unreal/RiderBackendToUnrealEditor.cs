@@ -30,6 +30,9 @@ namespace ReSharperPlugin.UnrealEditor
         private readonly UnrealToolWindowHost myToolWindowHost;
         private readonly UnrealHost myUnrealHost;
 
+        private bool PlayedFromUnreal = false;
+        private bool PlayedFromRider = false;
+
         public RiderBackendToUnrealEditor(Lifetime lifetime, IScheduler dispatcher, ISolution solution, ILogger logger,
             UnrealHost unrealHost, UnrealToolWindowHost toolWindowHost)
         {
@@ -155,9 +158,40 @@ namespace ReSharperPlugin.UnrealEditor
                         myUnrealHost.PerformModelAction(riderModel =>
                             riderModel.AllowSetForegroundWindow.Start(lt, pid)) as RdTask<bool>);
 
+                    unrealModel.Play.Advise(viewLifetime, b =>
+                    {
+                        myUnrealHost.PerformModelAction(riderModel =>
+                        {
+                            if (PlayedFromRider)
+                                return;
+                            try
+                            {
+                                PlayedFromUnreal = true;
+                                riderModel.Play.Set(b);
+                            }
+                            finally
+                            {
+                                PlayedFromUnreal = false;
+                            }
+                        });
+                    });
+
                     myUnrealHost.PerformModelAction(riderModel =>
                     {
-                        riderModel.Play.Advise(viewLifetime, b => unrealModel.Play.Set(b));
+                        riderModel.Play.Advise(viewLifetime, b =>
+                        {
+                            if (PlayedFromUnreal)
+                                return;
+                            try
+                            {
+                                PlayedFromRider = true;
+                                unrealModel.Play.Set(b);
+                            }
+                            finally
+                            {
+                                PlayedFromRider = false;
+                            }
+                        });
                     });
                 });
         }
