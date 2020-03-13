@@ -84,7 +84,7 @@ object RdRiderModel : Ext(SolutionModel.Solution) {
 
     init {
 //        property("projectName", string)
-        property("play", bool)
+        property("play", int)
 //        signal("hyperLink", UnrealLogHighlighter)
         field("toolWindowModel", ToolWindowModel)
 

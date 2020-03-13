@@ -158,7 +158,7 @@ namespace ReSharperPlugin.UnrealEditor
                         myUnrealHost.PerformModelAction(riderModel =>
                             riderModel.AllowSetForegroundWindow.Start(lt, pid)) as RdTask<bool>);
 
-                    unrealModel.Play.Advise(viewLifetime, b =>
+                    unrealModel.Play.Advise(viewLifetime, val =>
                     {
                         myUnrealHost.PerformModelAction(riderModel =>
                         {
@@ -167,7 +167,7 @@ namespace ReSharperPlugin.UnrealEditor
                             try
                             {
                                 PlayedFromUnreal = true;
-                                riderModel.Play.Set(b);
+                                riderModel.Play.Set(val);
                             }
                             finally
                             {
@@ -178,14 +178,14 @@ namespace ReSharperPlugin.UnrealEditor
 
                     myUnrealHost.PerformModelAction(riderModel =>
                     {
-                        riderModel.Play.Advise(viewLifetime, b =>
+                        riderModel.Play.Advise(viewLifetime, val =>
                         {
                             if (PlayedFromUnreal)
                                 return;
                             try
                             {
                                 PlayedFromRider = true;
-                                unrealModel.Play.Set(b);
+                                unrealModel.Play.Set(val);
                             }
                             finally
                             {
