@@ -83,11 +83,15 @@ object RdRiderModel : Ext(SolutionModel.Solution) {
     }
 
     init {
-//        property("projectName", string)
         property("play", int)
-//        signal("hyperLink", UnrealLogHighlighter)
-        field("toolWindowModel", ToolWindowModel)
+        property("playMode", int)
+        signal("frameSkip", bool)
+
+        call("filterLinkCandidates", immutableList(LinkRequest), array(ILinkResponse)).async
 
         callback("AllowSetForegroundWindow", int, bool)
+
+        property("isConnectedToUnrealEditor", false)
+        property("isUnrealEngineSolution", false)
     }
 }

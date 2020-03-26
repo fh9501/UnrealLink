@@ -29,6 +29,8 @@ object RdEditorModel : Ext(RdEditorRoot) {
         signal("projectName", FString)
         signal("unrealLog", UnrealLogEvent).readonly.async
         property("play", int)
+        property("playMode", int)
+        signal("frameSkip", bool)
 
         signal("openBlueprint", UE4Library.BlueprintReference).write
 

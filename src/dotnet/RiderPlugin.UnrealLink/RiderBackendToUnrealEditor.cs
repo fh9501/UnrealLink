@@ -33,6 +33,11 @@ namespace RiderPlugin.UnrealLink
         private bool PlayedFromUnreal = false;
         private bool PlayedFromRider = false;
 
+        private bool PlayedFromUnreal = false;
+        private bool PlayedFromRider = false;
+        private bool PlayModeFromUnreal = false;
+        private bool PlayModeFromRider = false;
+
         public RiderBackendToUnrealEditor(Lifetime lifetime, IScheduler dispatcher, ISolution solution, ILogger logger,
             UnrealHost unrealHost, UnrealToolWindowHost toolWindowHost)
         {
@@ -105,6 +110,8 @@ namespace RiderPlugin.UnrealLink
                 }
 
                 var wire = new SocketWire.Client(modelLifetime, myDispatcher, port, "UnrealEditorClient");
+                wire.Connected.Advise(modelLifetime, isConnected => myUnrealHost.PerformModelAction(riderModel =>
+                    riderModel.IsConnectedToUnrealEditor.SetValue(isConnected)));
 
                 //todo think about alive file from previous session
 
@@ -158,6 +165,7 @@ namespace RiderPlugin.UnrealLink
                         myUnrealHost.PerformModelAction(riderModel =>
                             riderModel.AllowSetForegroundWindow.Start(lt, pid)) as RdTask<bool>);
 
+
                     unrealModel.Play.Advise(viewLifetime, val =>
                     {
                         myUnrealHost.PerformModelAction(riderModel =>
@@ -172,6 +180,23 @@ namespace RiderPlugin.UnrealLink
                             finally
                             {
                                 PlayedFromUnreal = false;
+                            }
+                        });
+                    });
+                    unrealModel.PlayMode.Advise(viewLifetime, val =>
+                    {
+                        myUnrealHost.PerformModelAction(riderModel =>
+                        {
+                            if (PlayModeFromRider)
+                                return;
+                            try
+                            {
+                                PlayModeFromUnreal = true;
+                                riderModel.PlayMode.Set(val);
+                            }
+                            finally
+                            {
+                                PlayModeFromUnreal = false;
                             }
                         });
                     });
@@ -192,6 +217,46 @@ namespace RiderPlugin.UnrealLink
                                 PlayedFromRider = false;
                             }
                         });
+                        riderModel.OpenBlueprint.Advise(viewLifetime, blueprintReference =>
+                            OnOpenedBlueprint(unrealModel, blueprintReference));
+
+                        riderModel.NavigateToClass.Advise(viewLifetime,
+                            uClass => myEditorNavigator.NavigateToClass(uClass));
+
+                        riderModel.NavigateToMethod.Advise(viewLifetime,
+                            methodReference => myEditorNavigator.NavigateToMethod(methodReference));
+
+                        riderModel.Play.Advise(viewLifetime, val =>
+                        {
+                            if (PlayedFromUnreal)
+                                return;
+                            try
+                            {
+                                PlayedFromRider = true;
+                                unrealModel.Play.Set(val);
+                            }
+                            finally
+                            {
+                                PlayedFromRider = false;
+                            }
+                        });
+
+                        riderModel.PlayMode.Advise(viewLifetime, val =>
+                        {
+                            if (PlayModeFromUnreal)
+                                return;
+                            try
+                            {
+                                PlayModeFromRider = true;
+                                unrealModel.PlayMode.Set(val);
+                            }
+                            finally
+                            {
+                                PlayModeFromRider = false;
+                            }
+                        });
+                        riderModel.FrameSkip.Advise(viewLifetime, skip =>
+                            unrealModel.FrameSkip.Fire(skip));
                     });
                 });
         }
