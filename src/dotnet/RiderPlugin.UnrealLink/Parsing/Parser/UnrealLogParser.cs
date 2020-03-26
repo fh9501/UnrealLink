@@ -7,11 +7,12 @@ using JetBrains.ReSharper.Feature.Services.StackTraces.StackTrace.Nodes;
 using JetBrains.Text;
 using JetBrains.Unreal.Lib;
 using JetBrains.Util;
-using ReSharperPlugin.UnrealEditor.Parsing.Lexer;
-using ReSharperPlugin.UnrealEditor.Parsing.Node;
-using ReSharperPlugin.UnrealEditor.Parsing.Node.ScriptStack;
+using RiderPlugin.Parsing.Lexer;
+using RiderPlugin.UnrealLink.Parsing.Lexer;
+using RiderPlugin.UnrealLink.Parsing.Node;
+using RiderPlugin.UnrealLink.Parsing.Node.ScriptStack;
 
-namespace ReSharperPlugin.UnrealEditor.Parsing.Parser
+namespace RiderPlugin.UnrealLink.Parsing.Parser
 {
     public partial class UnrealLogParser
     {

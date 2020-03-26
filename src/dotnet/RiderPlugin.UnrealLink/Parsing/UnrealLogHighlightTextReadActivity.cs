@@ -11,11 +11,11 @@ using JetBrains.Threading;
 using JetBrains.Unreal.Lib;
 using JetBrains.Util;
 using JetBrains.Util.Logging;
-using ReSharperPlugin.UnrealEditor.Parsing.Parser;
-using ReSharperPlugin.UnrealEditor.Parsing.Resolver;
-using ReSharperPlugin.UnrealEditor.Parsing.Visitor;
+using RiderPlugin.UnrealLink.Parsing.Parser;
+using RiderPlugin.UnrealLink.Parsing.Resolver;
+using RiderPlugin.UnrealLink.Parsing.Visitor;
 
-namespace ReSharperPlugin.UnrealEditor.Parsing
+namespace RiderPlugin.UnrealLink.Parsing
 {
     public class UnrealLogHighlightTextReadActivity : InterruptableReadActivity
     {

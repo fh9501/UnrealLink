@@ -2,7 +2,7 @@ using JetBrains.Application.Threading;
 using JetBrains.Util;
 using JetBrains.Util.Logging;
 
-namespace ReSharperPlugin.UnrealEditor.Parsing
+namespace RiderPlugin.UnrealLink.Parsing
 {
     public enum UpdateStatus
     {

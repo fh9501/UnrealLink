@@ -1,11 +1,10 @@
-﻿using JetBrains.Annotations;
-using JetBrains.ReSharper.Feature.Services.StackTraces.StackTrace;
+﻿using JetBrains.ReSharper.Feature.Services.StackTraces.StackTrace;
 using JetBrains.ReSharper.Feature.Services.StackTraces.StackTrace.Nodes;
-using ReSharperPlugin.UnrealEditor.Parsing.Node;
-using ReSharperPlugin.UnrealEditor.Parsing.Node.ScriptStack;
-using IdentifierNode = ReSharperPlugin.UnrealEditor.Parsing.Node.IdentifierNode;
+using RiderPlugin.UnrealLink.Parsing.Node;
+using RiderPlugin.UnrealLink.Parsing.Node.ScriptStack;
+using IdentifierNode = RiderPlugin.UnrealLink.Parsing.Node.IdentifierNode;
 
-namespace ReSharperPlugin.UnrealEditor.Parsing.Visitor
+namespace RiderPlugin.UnrealLink.Parsing.Visitor
 {
     public abstract class UnrealLogVisitor : StackTraceVisitor
     {

@@ -1,11 +1,11 @@
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Feature.Services.StackTraces.StackTrace.Nodes;
 using JetBrains.Rider.Model;
-using ReSharperPlugin.UnrealEditor.Parsing.Node;
-using ReSharperPlugin.UnrealEditor.Parsing.Node.ScriptStack;
-using IdentifierNode = ReSharperPlugin.UnrealEditor.Parsing.Node.IdentifierNode;
+using RiderPlugin.UnrealLink.Parsing.Node;
+using RiderPlugin.UnrealLink.Parsing.Node.ScriptStack;
+using IdentifierNode = RiderPlugin.UnrealLink.Parsing.Node.IdentifierNode;
 
-namespace ReSharperPlugin.UnrealEditor.Parsing.Highlighting
+namespace RiderPlugin.UnrealLink.Parsing.Highlighting
 {
     [SolutionComponent]
     public class UnrealLogHighlightingFactory

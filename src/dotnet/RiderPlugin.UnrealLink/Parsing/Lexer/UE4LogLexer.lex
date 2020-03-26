@@ -1,7 +1,7 @@
 using System.Collections;
 using JetBrains.Util;
 using JetBrains.Text;
-using ReSharperPlugin.UnrealEditor.Parsing.Lexer;
+using RiderPlugin.UnrealLink.Parsing.Lexer;
 
 %%
 
@@ -130,7 +130,7 @@ using ReSharperPlugin.UnrealEditor.Parsing.Lexer;
   
 %}
 
-%namespace ReSharperPlugin.UnrealEditor.Parsing.Lexer
+%namespace RiderPlugin.Parsing.Lexer
 %class UE4LogLexer
 %public
 %function _locateToken

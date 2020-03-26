@@ -2,7 +2,7 @@ using JetBrains.Annotations;
 using JetBrains.ReSharper.Feature.Services.StackTraces.StackTrace.Nodes;
 using JetBrains.Util;
 
-namespace ReSharperPlugin.UnrealEditor.Parsing.Highlighting
+namespace RiderPlugin.UnrealLink.Parsing.Highlighting
 {
     public class UnrealLogHighlighterData
     {

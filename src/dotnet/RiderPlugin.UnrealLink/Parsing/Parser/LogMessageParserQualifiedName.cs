@@ -1,8 +1,9 @@
 using JetBrains.Util;
-using ReSharperPlugin.UnrealEditor.Parsing.Lexer;
-using ReSharperPlugin.UnrealEditor.Parsing.Node;
+using RiderPlugin.Parsing.Lexer;
+using RiderPlugin.UnrealLink.Parsing.Lexer;
+using RiderPlugin.UnrealLink.Parsing.Node;
 
-namespace ReSharperPlugin.UnrealEditor.Parsing.Parser
+namespace RiderPlugin.UnrealLink.Parsing.Parser
 {
     public partial class UnrealLogParser
     {

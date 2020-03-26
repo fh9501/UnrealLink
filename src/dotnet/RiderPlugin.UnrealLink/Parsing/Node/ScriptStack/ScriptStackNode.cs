@@ -5,7 +5,7 @@ using JetBrains.ReSharper.Feature.Services.StackTraces.StackTrace;
 using JetBrains.ReSharper.Feature.Services.StackTraces.StackTrace.Nodes;
 using JetBrains.Util;
 
-namespace ReSharperPlugin.UnrealEditor.Parsing.Node.ScriptStack
+namespace RiderPlugin.UnrealLink.Parsing.Node.ScriptStack
 {
     public class ScriptStackNode : /*LogMessageNode*/ StackTraceNode
     {

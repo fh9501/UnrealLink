@@ -3,7 +3,7 @@ using JetBrains.ReSharper.Feature.Services.StackTraces.StackTrace;
 
 // ReSharper disable InconsistentNaming
 
-namespace ReSharperPlugin.UnrealEditor.Parsing.Highlighting
+namespace RiderPlugin.UnrealLink.Parsing.Highlighting
 {
     public static class UnrealLogHighlightingAttributeIds
     {

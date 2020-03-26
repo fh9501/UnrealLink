@@ -57,8 +57,6 @@ void FRiderLinkModule::StartupModule() {
 
     UE_LOG(FLogRiderLinkModule, Warning, TEXT("INIT START"));
     rdConnection.scheduler.queue([this] {
-      rdConnection.unrealToBackendModel.get_play().advise(rdConnection.lifetime, [](bool shouldPlay) {
-    rdConnection.scheduler.queue([this] {
       rdConnection.unrealToBackendModel.get_play().advise(
           rdConnection.lifetime, [this](int playValue) {
             if (PlayFromUnreal)
@@ -127,7 +125,6 @@ void FRiderLinkModule::StartupModule() {
                             : 0);
                 }
             });
-            auto CS = FString(msg);
             if (Type != ELogVerbosity::SetColor) {
                 rdConnection.scheduler.queue(
                     [this, message = FString(msg), Type, Name = Name.GetPlainNameString(), Time, &number]() mutable {

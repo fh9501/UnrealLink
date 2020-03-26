@@ -1,4 +1,4 @@
-namespace ReSharperPlugin.UnrealEditor.Parsing.Parser
+namespace RiderPlugin.UnrealLink.Parsing.Parser
 {
     public partial class UnrealLogParser
     {

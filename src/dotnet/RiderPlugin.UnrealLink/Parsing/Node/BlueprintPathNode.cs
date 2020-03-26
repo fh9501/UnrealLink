@@ -4,9 +4,9 @@ using JetBrains.ReSharper.Feature.Services.StackTraces.StackTrace;
 using JetBrains.ReSharper.Feature.Services.StackTraces.StackTrace.Nodes;
 using JetBrains.Unreal.Lib;
 using JetBrains.Util;
-using ReSharperPlugin.UnrealEditor.Parsing.Visitor;
+using RiderPlugin.UnrealLink.Parsing.Visitor;
 
-namespace ReSharperPlugin.UnrealEditor.Parsing.Node
+namespace RiderPlugin.UnrealLink.Parsing.Node
 {
     public class BlueprintPathNode : StackTraceNode
     {

@@ -1,9 +1,9 @@
 using JetBrains.Annotations;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.Cpp.Symbols;
-using ReSharperPlugin.UnrealEditor.Parsing.Node;
+using RiderPlugin.UnrealLink.Parsing.Node;
 
-namespace ReSharperPlugin.UnrealEditor.Parsing.Resolver
+namespace RiderPlugin.UnrealLink.Parsing.Resolver
 {
     public interface IIdentifierResolver
     {

@@ -1,6 +1,6 @@
 // ReSharper disable InconsistentNaming
 // ReSharper disable IdentifierTypo
-namespace ReSharperPlugin.UnrealEditor.Parsing.Lexer
+namespace RiderPlugin.UnrealLink.Parsing.Lexer
 {
     public enum UE4LogTokenTypes
     {

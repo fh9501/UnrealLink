@@ -13,13 +13,13 @@ using JetBrains.ReSharper.Resources.Shell;
 using JetBrains.Rider.Model;
 using JetBrains.Unreal.Lib;
 using JetBrains.Util.Special;
-using ReSharperPlugin.UnrealEditor.Parsing;
-using ReSharperPlugin.UnrealEditor.Parsing.Highlighting;
-using ReSharperPlugin.UnrealEditor.Parsing.Node;
-using ReSharperPlugin.UnrealEditor.Parsing.Parser;
-using ReSharperPlugin.UnrealEditor.Parsing.Resolver;
+using RiderPlugin.UnrealLink.Parsing;
+using RiderPlugin.UnrealLink.Parsing.Highlighting;
+using RiderPlugin.UnrealLink.Parsing.Node;
+using RiderPlugin.UnrealLink.Parsing.Parser;
+using RiderPlugin.UnrealLink.Parsing.Resolver;
 
-namespace ReSharperPlugin.UnrealEditor
+namespace RiderPlugin.UnrealLink
 {
     [SolutionComponent]
     public class UnrealToolWindowHost

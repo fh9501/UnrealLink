@@ -2,9 +2,9 @@ using System.IO;
 using JetBrains.ReSharper.Feature.Services.StackTraces.StackTrace;
 using JetBrains.ReSharper.Feature.Services.StackTraces.StackTrace.Nodes;
 using JetBrains.Util;
-using ReSharperPlugin.UnrealEditor.Parsing.Visitor;
+using RiderPlugin.UnrealLink.Parsing.Visitor;
 
-namespace ReSharperPlugin.UnrealEditor.Parsing.Node.ScriptStack
+namespace RiderPlugin.UnrealLink.Parsing.Node.ScriptStack
 {
     public class ScriptStackHeaderNode : StackTraceNode
     {

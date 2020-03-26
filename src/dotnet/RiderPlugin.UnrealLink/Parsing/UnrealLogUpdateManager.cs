@@ -5,10 +5,10 @@ using JetBrains.ReSharper.Feature.Services.StackTraces.StackTrace;
 using JetBrains.Unreal.Lib;
 using JetBrains.Util;
 using JetBrains.Util.Logging;
-using ReSharperPlugin.UnrealEditor.Parsing.Parser;
-using ReSharperPlugin.UnrealEditor.Parsing.Resolver;
+using RiderPlugin.UnrealLink.Parsing.Parser;
+using RiderPlugin.UnrealLink.Parsing.Resolver;
 
-namespace ReSharperPlugin.UnrealEditor.Parsing
+namespace RiderPlugin.UnrealLink.Parsing
 {
     public class UnrealLogUpdateManager
     {

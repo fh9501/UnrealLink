@@ -13,9 +13,9 @@ using JetBrains.ReSharper.Psi.Cpp.Util;
 using JetBrains.ReSharper.Resources.Shell;
 using JetBrains.Util;
 using JetBrains.Util.Caches;
-using ReSharperPlugin.UnrealEditor.Parsing.Node;
+using RiderPlugin.UnrealLink.Parsing.Node;
 
-namespace ReSharperPlugin.UnrealEditor.Parsing.Resolver
+namespace RiderPlugin.UnrealLink.Parsing.Resolver
 {
     [SolutionComponent]
     public class IdentifierResolver : IIdentifierResolver
