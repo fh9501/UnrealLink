@@ -35,4 +35,8 @@ private:
 	FRiderOutputDevice outputDevice;
 	bool PlayFromUnreal = false;
 	bool PlayFromRider = false;
+
+	static FDateTime Start_Time;
+
+	void FireLogs(const FString& Message, ELogVerbosity::Type Type, const FName& String, const TOptional<double>& Time);
 };

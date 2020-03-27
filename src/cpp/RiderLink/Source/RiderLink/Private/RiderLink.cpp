@@ -45,6 +45,8 @@ private:
   bool &value;
 };
 
+FDateTime FRiderLinkModule::Start_Time{};
+
 void FRiderLinkModule::ShutdownModule() {}
 
 static int NumberOfPlayers(int mode) { return (mode & 3) + 1; }
@@ -158,13 +160,8 @@ static int ModeFromSettings() {
 
 void FRiderLinkModule::StartupModule() {
   using namespace Jetbrains::EditorPlugin;
-
-  static const auto START_TIME = FDateTime::Now();
-
-  static const auto GetTimeNow = [](double Time) -> rd::DateTime {
-    return rd::DateTime(static_cast<std::time_t>(START_TIME.ToUnixTimestamp() +
-                                                 static_cast<int64>(Time)));
-  };
+  
+  Start_Time = FDateTime::Now();
 
   rdConnection.init();
   slateApplication = &FSlateApplication::Get();
@@ -242,9 +239,8 @@ void FRiderLinkModule::StartupModule() {
 
   static auto MessageEndpoint = FMessageEndpoint::Builder("FAssetEditorManager").Build();
       outputDevice.onSerializeMessage.BindLambda(
-          [this, number = 0](const TCHAR* msg, ELogVerbosity::Type Type, const class FName& Name,
+          [this](const TCHAR* msg, ELogVerbosity::Type Type, const class FName& Name,
                  TOptional<double> Time) mutable  {
-              auto CS = FString(msg);
               rdConnection.scheduler.queue([this]() {
                   if (GUnrealEd && !PlayFromRider) {
                       SetForTheScope s(PlayFromUnreal);
@@ -255,22 +251,35 @@ void FRiderLinkModule::StartupModule() {
                   }
               });
               if (Type != ELogVerbosity::SetColor) {
-                  rdConnection.scheduler.queue(
-                      [this, message = FString(msg), Type, Name = Name.GetPlainNameString(), Time, &number]() mutable {
-                          rd::optional<rd::DateTime> DateTime;
-                          if (Time) {
-                              DateTime = GetTimeNow(Time.GetValue());
-                          }
-                          auto MessageInfo = LogMessageInfo(Type, Name, DateTime);
-                          rdConnection.unrealToBackendModel.get_unrealLog().fire(
-                                           UnrealLogEvent{number++, std::move(MessageInfo), std::move(message)});
-                      });
+                FireLogs(FString(msg), Type, Name, Time);
               }
           });
 
   UE_LOG(FLogRiderLinkModule, Warning, TEXT("INIT FINISH"));
   // FDebug::DumpStackTraceToLog();
 }
+
+void FRiderLinkModule::FireLogs(const FString& Message, ELogVerbosity::Type Type, const FName& Name,
+                                const TOptional<double>& Time) {
+  using namespace Jetbrains::EditorPlugin;
+
+  static int MessageNumber = 0;
+  static const auto GetTimeNow = [](double Time) -> rd::DateTime {
+    return rd::DateTime(static_cast<std::time_t>(Start_Time.ToUnixTimestamp() + static_cast<int64>(Time)));
+  };
+  rdConnection.scheduler.queue(
+    [this, message = FString(Message), Type, Name = Name.GetPlainNameString(), Time]() mutable {
+      rd::optional<rd::DateTime> DateTime;
+      if (Time) {
+        DateTime = GetTimeNow(Time.GetValue());
+      }
+      auto MessageInfo = LogMessageInfo(Type, Name, DateTime);
+      rdConnection.unrealToBackendModel.get_unrealLog().fire(UnrealLogEvent{
+        MessageNumber++, std::move(MessageInfo), std::move(message)
+      });
+    });
+}
+
 
 bool FRiderLinkModule::SupportsDynamicReloading() { return true; }
 
