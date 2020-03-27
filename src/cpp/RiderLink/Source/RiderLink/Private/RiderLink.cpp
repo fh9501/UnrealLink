@@ -13,6 +13,7 @@
 #include "EditorViewportClient.h"
 #if ENGINE_MINOR_VERSION < 24
 #include "ILevelViewport.h"
+#include "LevelEditorViewport.h"
 #else
 #include "IAssetViewport.h"
 #endif
@@ -21,6 +22,7 @@
 #include "IHeadMountedDisplay.h"
 #include "IXRTrackingSystem.h"
 #include "LevelEditor.h"
+#include "SlateApplication.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/PlayerStart.h"
 
@@ -85,8 +87,8 @@ static void RequestPlay(int mode) {
   FLevelEditorModule &LevelEditorModule =
       FModuleManager::GetModuleChecked<FLevelEditorModule>(
           TEXT("LevelEditor"));
-  auto ActiveLevelViewport =
-      LevelEditorModule.GetFirstActiveViewport();
+  TSharedPtr<ILevelViewport> ActiveLevelViewport =
+    LevelEditorModule.GetFirstActiveViewport();
   ULevelEditorPlaySettings *PlayInSettings =
       GetMutableDefault<ULevelEditorPlaySettings>();
   EPlayModeType playMode = PlayModeFromInt((mode & (16 + 32 + 64)) >> 4);
@@ -104,9 +106,14 @@ static void RequestPlay(int mode) {
   const FVector *StartLocation = nullptr;
   const FRotator *StartRotation = nullptr;
   if (!atPlayerStart && slateApplication && ActiveLevelViewport.IsValid() &&
-      slateApplication->FindWidgetWindow(ActiveLevelViewport->AsWidget()).IsValid()) {
+    slateApplication->FindWidgetWindow(ActiveLevelViewport->AsWidget()).IsValid()) {
+#if ENGINE_MINOR_VERSION < 24
+    StartLocation = &ActiveLevelViewport->GetLevelViewportClient().GetViewLocation();
+    StartRotation = &ActiveLevelViewport->GetLevelViewportClient().GetViewRotation();
+#else
     StartLocation = &ActiveLevelViewport->GetAssetViewportClient().GetViewLocation();
     StartRotation = &ActiveLevelViewport->GetAssetViewportClient().GetViewRotation();
+#endif
   }
 
   if (playMode == PlayMode_InEditorFloating) {

@@ -32,9 +32,6 @@ namespace RiderPlugin.UnrealLink
 
         private bool PlayedFromUnreal = false;
         private bool PlayedFromRider = false;
-
-        private bool PlayedFromUnreal = false;
-        private bool PlayedFromRider = false;
         private bool PlayModeFromUnreal = false;
         private bool PlayModeFromRider = false;
 
@@ -217,15 +214,6 @@ namespace RiderPlugin.UnrealLink
                                 PlayedFromRider = false;
                             }
                         });
-                        riderModel.OpenBlueprint.Advise(viewLifetime, blueprintReference =>
-                            OnOpenedBlueprint(unrealModel, blueprintReference));
-
-                        riderModel.NavigateToClass.Advise(viewLifetime,
-                            uClass => myEditorNavigator.NavigateToClass(uClass));
-
-                        riderModel.NavigateToMethod.Advise(viewLifetime,
-                            methodReference => myEditorNavigator.NavigateToMethod(methodReference));
-
                         riderModel.Play.Advise(viewLifetime, val =>
                         {
                             if (PlayedFromUnreal)

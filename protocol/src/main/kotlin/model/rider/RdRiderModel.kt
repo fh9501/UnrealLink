@@ -89,6 +89,8 @@ object RdRiderModel : Ext(SolutionModel.Solution) {
 
         call("filterLinkCandidates", immutableList(LinkRequest), array(ILinkResponse)).async
 
+        field("ToolWindowModel", ToolWindowModel)
+
         callback("AllowSetForegroundWindow", int, bool)
 
         property("isConnectedToUnrealEditor", false)
